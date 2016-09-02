@@ -1,0 +1,124 @@
+
+
+.add-comment-wrap{
+	margin-bottom: 25px;
+	position: relative;
+	display: block;
+	clear: both;
+	form{
+		position: relative;
+		display: block;
+		height: 40px;
+		margin: 0 auto;
+
+		textarea, .controlButtons{
+			float: left;
+			position: relative;
+			height: 100%;
+			vertical-align: middle;
+		}
+		textarea{
+			resize: none;
+    	outline: none;
+	    border: 1px solid #aaa;
+			border-radius: 2px;
+    	padding: 3px 7px;
+	    font-smoothing: antialiased;
+	    font-size: 14px;
+	    color: #555f77;
+			width: 80%;
+		}
+
+		.controlButtons{
+			margin-left: 5px;
+			button{
+				margin: 0;
+				height: 100%;
+			}
+		}
+	}
+}
+
+
+.comment-list{
+	clear: both;
+	.comment-wrap{
+		padding: 5px 7px;
+		width: 100%;
+		display: block;
+		margin-bottom: 15px;
+		background-color: white;
+		-webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.15);
+		-moz-box-shadow: 0 1px 1px rgba(0,0,0,0.15);
+		box-shadow: 0 1px 1px rgba(0,0,0,0.15);
+		border-radius: 4px;
+		.comment-info{
+
+			span{
+				display: inline-block;
+		    color: #999;
+		    font-size: 13px;
+		    position: relative;
+		    top: 1px;
+		    margin-right: 10px;
+
+		    a{
+		    	font-size: 14px;
+		    	color: $brand-primary;
+
+		    	&:hover{
+		    		text-decoration: none;
+		    		color: darken($brand-primary, 20%);
+		    	}
+		    }
+
+		    .autorBadge{
+					top: -1px;
+					border-radius: 2px;
+					font-size: 10px;
+					color: white;
+					padding: 2px 3px;
+					background-color: $brand-primary;
+		    }
+			}
+		}
+
+		.comment-content{
+			textarea{
+				width: 100%;
+	    	resize: none;
+	    	outline: none;
+		    display: block;
+		    border: 1px solid #aaa;
+	    	padding: 7px;
+	    	margin: 7px 0;
+		    font-smoothing: antialiased;
+		    font-size: 14px;
+		    color: #555f77;
+			}
+
+			p{
+				font-size: 15px;
+				margin: 0px;
+				color: #595959;
+				padding: 12px;
+			}
+		}
+
+		.comment-edit{
+			a{
+				float: right;
+				margin-left: 7px;
+				font-size: 13px;
+			}
+
+			a.editComment{
+				color: $brand-success;
+			}
+
+			a.removeComment{
+				color: $brand-danger;
+			}
+		}
+	}
+}

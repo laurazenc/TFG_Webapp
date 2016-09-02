@@ -1,0 +1,130 @@
+<div class="container">
+  <div class="profile">
+    <div class="controlButtons " ng-show="profile.isCreator()">
+
+    	<div class="marginBottom">
+    		<h2>Editar Perfil</h2>
+    		<form class="form" method="post" name="editForm" novalidate>
+	          <div class="form-group editGroup clearfix" ng-class="{ 'has-success' : editForm.username.$valid && editForm.username.$dirty, 'has-error' : editForm.username.$invalid && editForm.username.$dirty}">
+              <div class="label-group">
+                <div class="label-name"><span>*</span> Nombre :</div>
+                <div class="label-desc">Nombre que se mostrará al resto de usuarios.</div>
+              </div>
+              <div class="input-group">
+                <div class="form-group"
+                      ng-class="{
+                      'has-success' : editForm.username.$valid,
+                      'has-error' : editForm.username.$invalid && !editForm.username.$pristine }">
+                  <input class="inputName" type="text" name="username" ng-model="profile.user.username" placeholder="Username" ng-minlength="3" ng-maxlength="50">
+                  <div class="help-block text-danger"
+                      ng-if="editForm.username.$invalid && !editForm.username.$pristine"
+                      ng-messages="editForm.username.$error">
+                    <div ng-message="lenght">El nombre de usuario debe tener al menos 3 caracteres.</div>
+                  </div>
+                </div>
+              </div>
+	            </div>
+
+
+	          <div class="form-group editGroup clearfix">
+              <div class="label-group">
+                <div class="label-name"><span>*</span> Email :</div>
+              </div>
+              <div class="input-group">
+                <div class="form-group"
+                  ng-class="{
+                  'has-success' : editForm.email.$valid,
+                  'has-error' : editForm.email.$invalid && !editForm.email.$pristine }">
+                  <input class="inputName" type="email" name="email" ng-model="profile.user.email" placeholder="Email">
+                  <div class="help-block text-danger"
+                    ng-if="editForm.email.$invalid && !editForm.email.$pristine"
+                    ng-messages="editForm.email.$error">
+                    <div ng-message="email">El email no es valido.</div>
+                  </div>
+                </div>
+              </div>
+	          </div>
+
+	          <div class="form-group editGroup clearfix">
+              <div class="label-group">
+                <div class="label-name"><span>*</span> Contraseña :</div>
+                <div class="label-desc">La contraseña estará formada por una cadena de entre 5 y 10 caracteres.</div>
+              </div>
+              <div class="input-group">
+                <div class="form-group"
+                     ng-class="{
+                     'has-success' : editForm.password.$valid,
+                     'has-error' : editForm.password.$invalid && !editForm.password.$pristine }">
+                    <input class="inputName" type="password" name="password" ng-model="profile.password"
+                    ng-minlength="5" ng-maxlength="10"
+                    placeholder="Password">
+                    <div class="help-block text-danger"
+                         ng-if="editForm.password.$invalid && !editForm.password.$pristine"
+                         ng-messages="editForm.password.$error">
+                      <div ng-message="lenght">La contraseña debe ser una palabra de entre 5 y 10 caracteres.</div>
+                    </div>
+                  </div>
+                  <div class="form-group"
+                       ng-class="{
+                       'has-success' : editForm.password_c.$valid,
+                       'has-error' : editForm.password_c.$invalid && !editForm.password_c.$pristine }">
+                      <input class="inputName" type="password" name="password_c" ng-model="profile.password_c"
+                      valid-password-c="{{editForm.password.$viewValue===editForm.password_c.$viewValue}}" placeholder="Confirm Password">
+                      <div class="help-block text-danger" >
+                        <span ng-show="editForm.password.$dirty && editForm.password_c.$pristine">Debes confirmar la contraseña.</span>
+                        <span ng-show="editForm.password_c.$error.noMatch && editForm.password.$dirty">Las contraseñas no coinciden.</span>
+      	              </div>
+                    </div>
+                </div>
+              </div>
+            </div>
+
+	          <div class="controlButtons clearfix">
+              <button class="btn btn-primary pull-right" type="submit"  ng-click="profile.update()" ng-disabled="!editForm.$valid">Actualizar Datos</button>
+	            <button class="btn btn-danger pull-right" type="submit"  ng-click="profile.remove()" ng-disabled="!editForm.$valid">Eliminar cuenta</button>
+	          </div>
+	      <form>
+    	</div>
+    </div>
+
+
+  </div>
+</div>
+
+<!--  PROJECTS -->
+<div class="container" ng-show="!profile.isCreator()">
+  <div class="controlButtons marginTop">
+    <h2>{{profile.userInfo.username}}</h2>
+    <div class="byline">
+      <span class="byline-item">{{profile.userInfo.email}}</span>
+    </div>
+  </div>
+	<div class="panel panel-default">
+    <div class="panel-heading">
+      Proyectos
+      <div class="pull-right">
+        <input class="search" type="text" ng-model="profile.query.name" placeholder="Search...">
+      </div>
+    </div>
+
+    <div class="panel-body">
+      <div ng-model="result" ng-repeat="project in profile.projects | orderBy:sortOrder | filter:query.name" class="col-md-4 col-sm-6">
+        <div class="single-pen">
+          <div class="meta">
+            <a href="/projects/{{project._id}}"><h5>{{project.title}}</h5></a>
+            <h6><i class="ion-clock"></i> {{project.created_at | date}}</h6>
+
+          </div>
+					<div class="iframe-wrap">
+            <a href="/projects/{{project._id}}"></a>
+            <div theframe="project"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</div>
+<script type="text/javascript" src="app/assets/js/functions.js"></script>

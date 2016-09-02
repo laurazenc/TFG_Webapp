@@ -1,0 +1,67 @@
+<div class="width-wrapper .col-xs-1	.col-sm-4 .col-md-6	.col-lg-10 center-block">
+	<div ng-if="dashboard.isLoggedIn">
+		<div class="homeScreen row">
+			<div class="dashboard-header clearfix">
+				<ul class="left-header">
+					<li><h3>Ultimos proyectos</h3></li>
+					<li class="dash-type">{{dashboard.type.text}}</li>
+					<li class="dash-description">{{dashboard.type.description}}</li>
+				</ul>
+				<ul class="nav navbar-nav right-nav right-header">
+	        <li class="">
+	          <select class="dropdown-toggle" data-toggle="dropdown" type="text" ng-model="dashboard.typeOrder" ng-options="item.value as item.text for item in dashboard.typeOptions"></select>
+	        </li>
+	      </ul>
+			</div>
+			<div class="panel filtering panel-default">
+				<div class="panel-heading  clearfix text-center">
+					<form action="" class="form-inline">
+						<div class="form-group right-filter">
+							<input class="form-control" type="text" ng-model="dashboard.query.name" placeholder="Buscar...">
+						</div>
+						<div class="form-group dropdown left-filter">
+							<select class="btn btn-default dropdown-toggle" type="text" ng-model="dashboard.sortOrder" ng-options="item.value as item.text for item in dashboard.sortOptions"></select>
+
+						</div>
+					</form>
+				</div>
+				<div class="panel-body">
+					<div ng-model="result" dir-paginate="project in dashboard.projects|orderBy:dashboard.sortOrder|filter: {'title': dashboard.query.name, 'type': dashboard.typeOrder}|itemsPerPage:6:'homePage'" pagination-id="homePage" class="col-md-4 col-sm-6">
+						<div class="single-pen" ng-class="{'educational' : project.type=='educational'}">
+							<div class="meta">
+								<a href="/projects/{{project._id}}"><h5>{{project.title}}</h5></a>
+								<h6> <i class="ion-person"></i><a href="/profile/{{project.creator._id}}"> {{project.creator.username}} </a> | <i class="ion-clock"></i> {{project.created_at | date}}</h6>
+
+							</div>
+							<div class="iframe-wrap">
+								<a href="/projects/{{project._id}}"></a>
+								<div theframe="project"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="pagination-wrap">
+					<dir-pagination-controls pagination-id='homePage'
+						max-size="5"
+						direction-links="true"
+						boundary-links="true" >
+					</dir-pagination-controls>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="container">
+  <div ng-if="!dashboard.isLoggedIn" class="wellcome-message">
+    <div class="homeScreen jumbotron">
+      <h2><i class="glyphicon glyphicon-blackboard"></i> UPM: WebApp</h2>
+      <p>Plataforma para aprendizaje <strong>HTML, CSS y JavaScript</strong>. Para acceder al sistema identifícate o crea una cuenta nueva.</p>
+      <p>
+        <a class="btn btn-lg btn-success" href="/login"><i class="ion-log-in"></i> Identifícate</a>
+        <a class="btn btn-lg btn-primary" href="/signup"><i class="ion-person-add"></i> Crear una cuenta</a>
+      </p>
+    </div>
+  </div>
+
+</div>

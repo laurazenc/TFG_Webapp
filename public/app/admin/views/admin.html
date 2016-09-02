@@ -1,0 +1,239 @@
+<div class="admin-panel-wrapper clearfix">
+  <div class="left-column">
+    <div class="panel-column">
+      <ul class="panel-menu">
+        <li ng-click="admin.goTo('General')"><i class="ion-pie-graph"></i><span> General</span></li>
+        <li ng-click="admin.goTo('Usuarios')"><i class="ion-person-stalker"></i><span> Usuarios</span></li>
+        <li ng-click="admin.goTo('Proyectos')"><i class="ion-briefcase"></i><span> Proyectos</span></li>
+        <li ng-click="admin.goTo('Comentarios')"><i class="ion-chatboxes"></i><span> Comentarios</span></li>
+      </ul>
+    </div>
+  </div>
+  <div class="right-column">
+    <div class="admin-wrap">
+      <div class="admin-header">
+        <span>Panel de Administrador - {{admin.actual}}</span>
+      </div>
+      <div class="admin-content">
+        <!-- General -->
+        <div ng-if="admin.generalSelector" class="content-general">
+          <div class="column">
+            <div class="column-wrap">
+              <div class="column-title">ÚLTIMOS USUARIOS REGISTRADOS</div>
+              <div class="column-content">
+                <div class="column-content-info column-content-user" ng-repeat="user in admin.generalUsers">
+                    <div class="user-name-roles">
+                      <span class="user-name">
+                        {{user.username}}
+                      </span>
+                      <div class="user-roles">
+                        <div class="user-role">alumno</div>
+                        <div ng-if="user.isTeacher" class="user-teacher">profesor</div>
+                        <div ng-if="user.isAdmin" class="user-admin">admin</div>
+                      </div>
+                    </div>
+                    <div class="user-email">{{user.email}}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="column">
+            <div class="column-wrap">
+              <div class="column-title">ÚLTIMOS PROYECTOS CREADOS</div>
+              <div class="column-content">
+                <div class="column-content-info column-content-project" ng-repeat="project in admin.generalProjects">
+                  <div class="project-title">{{project.title}}
+                  </div>
+                  <div class="project-creator-date clearfix">
+                    <div class="project-creator">{{project.creator.username}}</div>
+                    <div class="project-date">{{project.created_at | date : 'dd/MM/yyyy HH:mm'  }}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="column">
+            <div class="column-wrap">
+              <div class="column-title">ÚLTIMOS COMENTARIOS AÑADIDOS</div>
+              <div class="column-content">
+                <div class="column-content-info column-content-comment" ng-repeat="comment in admin.generalComments">
+                  <div class="comment-title">{{comment.project.title}}
+                  </div>
+                  <div class="comment-creator-date clearfix">
+                    <div class="comment-creator">{{comment.creator.username}}</div>
+                    <div class="comment-date">{{comment.created_at | date : 'dd/MM/yyyy HH:mm'  }}</div>
+                  </div>
+                  <div class="comment-content">
+                    <p>{{comment.content}}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Usuarios -->
+        <div ng-if="admin.usersSelector" class="content-users">
+          <form>
+              <div class="form-group searcher">
+                  <input type="text" ng-model="search" class="form-control" placeholder="Buscar...">
+                  <div class="clearSearch" ng-click="search = ''"></div>
+              </div>
+          </form>
+          <table class="table table-bordered table-striped table-hover">
+            <thead>
+              <tr>
+                <th ng-click="sort('_id')">Id
+                  <span class="glyphicon sort-icon" ng-show="sortKey=='_id'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                </th>
+                <th ng-click="sort('username')">Nombre
+                  <span class="glyphicon sort-icon" ng-show="sortKey=='username'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                </th>
+                <th ng-click="sort('email')">Email
+                  <span class="glyphicon sort-icon" ng-show="sortKey=='email'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                </th>
+                <th ng-click="sort('isTecher')">Profesor
+                  <span class="glyphicon sort-icon" ng-show="sortKey=='isTeacher'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                </th>
+                <th ng-click="sort('isAdmin')">Administrador
+                  <span class="glyphicon sort-icon" ng-show="sortKey=='isAdmin'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                </th>
+                <th>
+                  Opciones
+                </th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr dir-paginate="user in admin.usersUsers|orderBy:sortKey:reverse|filter:search|itemsPerPage:10:'userPage'" pagination-id="userPage">
+                <td>{{user._id}}</td>
+                <td>{{user.username}}</td>
+                <td>{{user.email}}</td>
+                <td><label class="toggle"><input type="checkbox" name="isTeacher" ng-model="user.isTeacher" value="user.isTeacher" class="toggle-checkbox" ng-click="admin.updateRole(user)"><div class="toggle-control"></div></label></td>
+                <td><label class="toggle"><input type="checkbox" name="isAdmin" ng-model="user.isAdmin" value="user.isAdmin" class="toggle-checkbox" ng-click="admin.updateRole(user)"><div class="toggle-control"></div></label></td>
+                <td>
+                  <div class="option-controls">
+                    <span ng-click="admin.editUser(user)">Editar</span>
+                    <span ng-click="admin.deleteUser(user)">Borrar</span>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <dir-pagination-controls pagination-id='userPage'
+             max-size="5"
+             direction-links="true"
+             boundary-links="true" >
+          </dir-pagination-controls>
+        </div>
+        <!-- Proyectos -->
+        <div ng-if="admin.projectsSelector" class="content-projects">
+          <form>
+              <div class="form-group searcher">
+                  <input type="text" ng-model="searchProject" class="form-control" placeholder="Buscar...">
+                  <div class="clearSearchProject" ng-click="searchProject = ''"></div>
+              </div>
+          </form>
+          <table class="table table-bordered table-striped table-hover">
+            <thead>
+              <tr>
+                <th ng-click="sort('_id')">Id
+                  <span class="glyphicon sort-icon" ng-show="sortKey=='_id'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                </th>
+                <th ng-click="sort('creator.username')">Creador
+                  <span class="glyphicon sort-icon" ng-show="sortKey=='creator.username'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                </th>
+                <th ng-click="sort('title')">Titulo
+                  <span class="glyphicon sort-icon" ng-show="sortKey=='title'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                </th>
+                <th ng-click="sort('created_at')">Fecha
+                  <span class="glyphicon sort-icon" ng-show="sortKey=='created_at'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                </th>
+                <th>
+                  Opciones
+                </th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr dir-paginate="project in admin.projectsProjects|orderBy:sortKey:reverse|filter:searchProject|itemsPerPage:10:'projectPage'" pagination-id="projectPage">
+                <td>{{project._id}}</td>
+                <td>{{project.creator.username}}</td>
+                <td>{{project.title}}</td>
+                <td>{{project.created_at | date}}</td>
+                <td>
+                  <div class="option-controls">
+                    <span ng-click="admin.editProject(project)">Editar</span>
+                    <span ng-click="admin.deleteProject(project)">Borrar</span>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <dir-pagination-controls pagination-id='projectPage'
+             max-size="5"
+             direction-links="true"
+             boundary-links="true" >
+          </dir-pagination-controls>
+
+        </div>
+        <!-- Comentarios -->
+        <div ng-if="admin.commentsSelector" class="content-comments">
+          <form>
+              <div class="form-group searcher">
+                  <input type="text" ng-model="searchComment" class="form-control" placeholder="Buscar...">
+                  <div class="clearSearchComment" ng-click="searchComment = ''"></div>
+              </div>
+          </form>
+          <table class="table table-bordered table-striped table-hover">
+            <thead>
+              <tr>
+                <th ng-click="sort('_id')">Id
+                  <span class="glyphicon sort-icon" ng-show="sortKey=='_id'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                </th>
+                <th ng-click="sort('creator.username')">Creador
+                  <span class="glyphicon sort-icon" ng-show="sortKey=='creator.username'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                </th>
+                <th ng-click="sort('project.title')">Proyecto
+                  <span class="glyphicon sort-icon" ng-show="sortKey=='project.title'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                </th>
+                <th ng-click="sort('content')">Comentario
+                  <span class="glyphicon sort-icon" ng-show="sortKey=='content'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                </th>
+                <th ng-click="sort('created_at')">Fecha
+                  <span class="glyphicon sort-icon" ng-show="sortKey=='created_at'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                </th>
+                <th>
+                  Opciones
+                </th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr dir-paginate="comment in admin.commentsComments|orderBy:sortKey:reverse|filter:searchComment|itemsPerPage:10:'commentPage'" pagination-id="commentPage">
+                <td>{{comment._id}}</td>
+                <td>{{comment.creator.username}}</td>
+                <td>{{comment.project.title}}</td>
+                <td>{{comment.content}}</td>
+                <td>{{comment.created_at | date}}</td>
+                <td>
+                  <div class="option-controls">
+                    <span ng-click="admin.editComment(comment)">Editar</span>
+                    <span ng-click="admin.deleteComment(comment)">Borrar</span>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <dir-pagination-controls pagination-id='commentPage'
+             max-size="5"
+             direction-links="true"
+             boundary-links="true" >
+          </dir-pagination-controls>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

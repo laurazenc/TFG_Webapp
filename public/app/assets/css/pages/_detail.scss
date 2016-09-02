@@ -1,0 +1,21 @@
+.byline{
+  color: #959595;
+  font-size: 14px;
+  &-item{
+    margin-right: 8px;
+  }
+}
+
+
+.container{
+  .description-wrap{
+    .description-text{
+      padding: 5px 20px;
+      border-left: 3px solid $btn-primary-bg;
+
+      ul{
+        padding-left: 10px;
+      }
+    }
+  }
+}

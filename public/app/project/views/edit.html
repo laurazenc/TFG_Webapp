@@ -1,0 +1,107 @@
+<form class="form" method="post" name="editForm" novalidate>
+  <div class="container edit">
+    <h2>EDITAR PROYECTO</h2>
+      <div class="form-group" ng-class="{ 'has-success' : editForm.title.$valid && editForm.title.$dirty, 'has-error' : editForm.title.$invalid && editForm.title.$dirty}">
+        <h4>Nombre:</h4>
+        <input class="form-control inputName" ng-class="{ 'edit-label' : editing }" type="text" name="title" ng-model="edit.project.title" placeholder="Project name" required>
+        <div class="help-block text-danger" ng-if="editForm.title.$dirty" ng-messages="editForm.title.$error">
+          <div ng-message="required">Es necesario un título de proyecto.</div>
+        </div>
+      </div>
+      <div class="form-group" ng-show="edit.currentUser.isTeacher">
+        <h4>Tipo de Proyecto: </h4>
+        <select class="btn btn-default dropdown-toggle" type="text" ng-model="type" name="type" ng-options="item.value as item.text for item in typeOptions"></select>
+      </div>
+      <div class="form-group" ng-class="{ 'has-success' : editForm.description.$valid && editForm.description.$dirty }">
+        <h4>Descripción:</h4>
+        <text-angular ng-class="{ 'edit-label' : editDesc }" class="ta-editor" type="text" name="description" ng-model="edit.project.description"></text-angular>
+      </div>
+      <div class="form-group libs-wrap" ng-class="{ 'has-success' : editForm.description.$valid && editForm.description.$dirty }">
+        <label> Librerías adicionales: </label>
+        <p>Las siguientes librerias se añadirán al proyecto.</p>
+        <div class="lib-list" id="lib-list">
+          <div class="external-lib">
+            <span class="lib-url">
+              <input name="lib" class="external-resource" type="url" placeholder="https://pagina.com/script.js" required>
+            </span>
+            <span class="delete-lib"><i class="fa fa-times"></i></span>
+          </div>
+        </div>
+        <div class="controls clearfix">
+          <span class="btn btn-default addBtn"  ng-click="addLib()">+ Añadir más recursos</span>
+        </div>
+      </div>
+      <a href="" class="help">Ayuda</a>
+      <div class="codeHelp">
+        <ul>
+          <div class="close">X</div>
+          <li>Es <strong>obligatorio</strong> introducir un título de proyecto.</li>
+          <li>Las librerías adicionales deben contener una <strong>URL correcta</strong>, de otro modo no se agregara al proyecto actual.</li>
+          <li>Puedes ocultar los editores utilizando los botones <img src="app/assets/images/botones.png" alt=""></li>
+          <li>El código que debes escribir dentro del editor <strong>HTML</strong> es el que iría dentro de la etiqueta "< body >"</li>
+          <li>El código que debes escribir dentro del editor <strong>CSS</strong> es el que iría en la hoja de estilo o dentro de la etiqueta "< style >"</li>
+          <li>El código que debes escribir dentro del editor <strong>JS</strong> es el que iría en un archivo .js o dentro de la etiqueta "< script >"</li>
+          <li>El código <strong>JavaScript</strong> no se ejecutará hasta que no pulses el botón compilar</li>
+        </ul>
+      </div>
+
+      <div class="controlButtons">
+        <button class="btn btn-danger pull-right" type="submit"  ng-click="edit.deleteProject()" ng-disabled="editForm.$invalid">Delete</button>
+        <button class="btn btn-primary pull-right" type="submit"  ng-click="edit.saveProject()" ng-disabled="editForm.$invalid">Save</button>
+      </div>
+  </div>
+
+  <div id="codeBlocks" class="codeBlocks" resizable r-directions="['bottom']">
+    <div class="controls">
+      <div class="button-group">
+        <input id="showHTML" checked="checked" type="checkbox" class="checkbox" />
+        <label for="showHTML" class="button">HTML</label>
+        <input id="showCSS" checked="checked" type="checkbox" class="checkbox" />
+        <label for="showCSS" class="button">CSS</label>
+        <input id="showJS" checked="checked" type="checkbox" class="checkbox" />
+        <label for="showJS" class="button">JS</label>
+      </div>
+    </div>
+
+    <div class="codeBlock html form-group">
+      <div class="title">
+        <button type="button" data-toggle=".html" class="closePanel">&times;</button>
+        <select id="htmlSelect">
+          <option value="text/html">HTML</option>
+        </select>
+      </div>
+      <textarea ui-codemirror="editorHTML" id="editorHTML" ng-model="edit.project.code[0].html"></textarea>
+    </div>
+
+    <div class="codeBlock css">
+      <div class="title">
+        <button type="button" data-toggle=".css" class="closePanel">&times;</button>
+        <select id="cssSelect">
+          <option value="text/css">CSS</option>
+        </select>
+      </div>
+      <textarea ui-codemirror="editorCSS" id="editorCSS" ng-model="edit.project.code[0].css" id="codeCSS"></textarea>
+    </div>
+
+    <div class="codeBlock js">
+      <div class="title">
+        <button type="button" data-toggle=".js" class="closePanel">&times;</button>
+        <button type="button" data-toggle=".js" ng-click="edit.jsCompile()" class="jsCompile">Ejecutar</button>
+        <div class="select">JS</div>
+      </div>
+      <textarea ui-codemirror="editorJS" id="editorJS" ng-model="edit.project.code[0].js"></textarea>
+    </div>
+    <div id="bar" ></div>
+  </div>
+
+  <div class="result">
+    <!-- RESULT -->
+    <style id="style"></style>
+    <script id="jQ" type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script class="lib" type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/snap.svg/0.3.0/snap.svg-min.js"></script>
+    <script id="script"></script>
+
+    <iframe id="view" class="view" scrolling="no"></iframe>
+  </div>
+</form>
+<script type="text/javascript" src="app/assets/js/editProject.js"></script>

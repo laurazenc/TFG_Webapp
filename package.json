@@ -1,0 +1,49 @@
+{
+  "name": "tfg",
+  "version": "1.0.0",
+  "description": "Trabajo de Fin de Grado",
+  "main": "server.js",
+  "scripts": {
+    "test": "gulp test"
+  },
+  "author": "Laura Coalla Cencerrado",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.14.1",
+    "browser-sync": "^2.11.1",
+    "chai": "^3.5.0",
+    "express": "^4.13.3",
+    "gulp": "^3.9.0",
+    "gulp-nodemon": "^2.0.6",
+    "gulp-plumber": "^1.0.1",
+    "gulp-sass": "^2.1.0",
+    "jsonwebtoken": "^5.4.1",
+    "karma": "^0.13.22",
+    "karma-chai": "^0.1.0",
+    "karma-chai-sinon": "^0.1.5",
+    "karma-coverage": "^0.5.5",
+    "karma-sinon": "^1.0.4",
+    "mongodb": "^2.1.6",
+    "mongoose": "^4.2.8",
+    "morgan": "^1.6.1",
+    "multer": "^1.1.0",
+    "nodemon": "^1.8.1",
+    "path": "^0.12.7",
+    "postcss": "^5.0.14",
+    "protractor": "^3.2.2",
+    "sass.js": "^0.9.7",
+    "sinon": "^1.12.2",
+    "sinon-chai": "^2.6.0",
+    "socket.io": "^1.4.5",
+    "socketio": "^1.0.0"
+  },
+  "devDependencies": {
+    "gulp-install": "^0.6.0",
+    "karma-chrome-launcher": "^0.2.2",
+    "karma-mocha": "^0.2.2",
+    "karma-phantomjs-launcher": "^1.0.0",
+    "mocha": "^2.4.5",
+    "phantomjs-prebuilt": "^2.1.6"
+  }
+}

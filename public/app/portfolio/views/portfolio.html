@@ -1,0 +1,64 @@
+<div class="container">
+	<div class="row col-md-10 col-md-offset-1">
+		<div class="portfolio-header clearfix">
+			<div class="header-title">Mis Proyectos ( {{portfolio.projects.length}} )</div>
+			<ul class="options">
+				<li>
+        	<input class="search" type="text" ng-model="portfolio.query.name" placeholder="Buscar...">
+      	</li>
+			</ul>
+		</div>
+		<div class="portfolio-content">
+			<div ng-repeat="project in portfolio.projects | filter:portfolio.query.name | orderBy:'created_at':true" class="single-project">
+				<a href="/projects/{{project._id}}">
+					<div class="project-main clearfix">
+						<div class="project-content clearfix">
+							<div class="iframe-wrap">
+								<div theframe="project"></div>
+							</div>
+							<div class="project-info">
+								<h3>{{project.title}}</h3>
+							</div>
+						</div>
+						<div class="project-extra">
+							<h6 ta-bind="text" ng-model="project.description" ta-readonly='disabled'>{{project.description}}</h6>
+							<span>{{project.created_at |date}}</span>
+						</div>
+					</div>
+
+				</a>
+			</div>
+		</div>
+	</div>
+
+	<div class="row col-md-10 col-md-offset-1">
+		<div class="portfolio-header clearfix">
+			<div class="header-title">Mis Comentarios  ( {{portfolio.comments.length}} )</div>
+			<ul class="options">
+				<li>
+        	<input class="search" type="text" ng-model="portfolio.query.content" placeholder="Buscar...">
+      	</li>
+			</ul>
+		</div>
+		<div class="portfolio-content">
+			<div ng-repeat="comment in portfolio.comments | filter:portfolio.query.content | orderBy:'created_at':true" class="single-comment">
+
+					<div class="comment-main clearfix">
+						<div class="comment-info">
+							<span>{{comment.project.title}}</span>
+							<span> <i class="glyphicon glyphicon-time"></i> {{comment.created_at |date}}</span>
+						</div>
+						<div class="comment-content">
+							<textarea type="text" ng-model="comment.content" required></textarea>
+						</div>
+						<div class="options">
+							<span><a href="/projects/{{comment.project._id}}">Ver</a></span>
+							<span ng-click="portfolio.edit(comment)">Editar</span>
+							<span ng-click="portfolio.remove(comment)">Borrar</span>
+						</div>
+					</div>
+
+			</div>
+		</div>
+	</div>
+</div>

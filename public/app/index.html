@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html ng-app="app">
+
+<head>
+  <base href="/">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width" />
+  <title>UPM: WebApp</title>
+
+  <!-- STYLESHEETS -->
+  <link rel="stylesheet" href="app/assets/css/style.css">
+  <link rel="stylesheet" href="//code.ionicframework.com/ionicons/1.5.2/css/ionicons.min.css">
+  <link rel="stylesheet" href="vendor/ng-dialog/css/ngDialog.css">
+  <link rel="stylesheet" href="vendor/ng-dialog/css/ngDialog-theme-default.css">
+  <link rel="stylesheet" href="vendor/angular-toasty/dist/angular-toasty.css">
+  <link rel="stylesheet" href="vendor/angular-bootstrap/ui-bootstrap-csp.css">
+  <link rel="stylesheet" href="vendor/font-awesome/css/font-awesome.css">
+  <link rel='stylesheet' href='vendor/textAngular/dist/textAngular.css'>
+
+
+  <!-- LIBRARIES -->
+  <script type="text/javascript" src="vendor/jquery/dist/jquery.js"></script>
+  <script type="text/javascript" src="vendor/angular/angular.js"></script>
+  <script type="text/javascript" src="vendor/angular-route/angular-route.min.js"></script>
+  <script type="text/javascript" src="vendor/ng-dialog/js/ngDialog.js"></script>
+  <script type="text/javascript" src="vendor/angular-resource/angular-resource.min.js"></script>
+  <script type="text/javascript" src='vendor/textAngular/dist/textAngular-rangy.min.js'></script>
+  <script type="text/javascript" src="vendor/textAngular/dist/textAngular-sanitize.min.js"></script>
+  <script type="text/javascript" src='vendor/textAngular/dist/textAngular.js'></script>
+  <script type="text/javascript" src='vendor/textAngular/dist/textAngularSetup.js'></script>
+  <script type="text/javascript" src="vendor/angular-toasty/dist/angular-toasty.min.js"></script>
+  <script type="text/javascript" src="vendor/angular-bootstrap/ui-bootstrap.js"></script>
+  <script type="text/javascript" src="vendor/angularUtils-pagination/dirPagination.js"></script>
+	<!-- <script type="text/javascript" src="/socket.io/socket.io.js"></script> -->
+	<script type="text/javascript" src="https://cdn.socket.io/socket.io-1.0.0.js"></script>
+
+  <script type="text/javascript" src="vendor/angular-animate/angular-animate.js"></script>
+  <script type="text/javascript" src="vendor/angular-strap/dist/angular-strap.js"></script>
+  <script type="text/javascript" src="vendor/angular-strap/dist/angular-strap.tpl.min.js"></script>
+  <script type="text/javascript" src="vendor/angular-cookies/angular-cookies.min.js"></script>
+  <script type="text/javascript" src="vendor/angular-moment/angular-moment.min.js"></script>
+
+
+  <!--  GLOBAL FILES-->
+  <!-- <script type="text/javascript" src="vendor/sass.js/dist/sass.js"></script> -->
+  <!-- <script type="text/javascript" src="vendor/sass.js/dist/sass.worker.js"></script> -->
+
+
+
+
+  <!-- EDITOR LIBRARIES -->
+  <script type="text/javascript" src="vendor/codemirror/lib/codemirror.js"></script>
+<!--  <script type="text/javascript" src="app/assets/js/codemirrorHelpers.js"></script>-->
+  <script type="text/javascript" src="vendor/angular-ui-codemirror/ui-codemirror.js"></script>
+  <link rel="stylesheet" href="vendor/codemirror/theme/zenburn.css">
+  <link rel="stylesheet" href="vendor/codemirror/lib/codemirror.css">
+  <link rel="stylesheet" href="vendor/codemirror/addon/scroll/simplescrollbars.css">
+  <script type="text/javascript" src="vendor/bootstrap/dist/js/bootstrap.js"></script>
+
+  <script type="text/javascript" src="vendor/codemirror/keymap/sublime.js"></script>
+  <script type="text/javascript" src="vendor/codemirror/addon/selection/mark-selection.js"></script>
+  <script type="text/javascript" src="vendor/codemirror/addon/edit/closebrackets.js"></script>
+  <script type="text/javascript" src="vendor/codemirror/addon/edit/matchbrackets.js"></script>
+  <script type="text/javascript" src="vendor/codemirror/addon/edit/closetag.js"></script>
+
+  <script type="text/javascript" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/28359/autoprefixer.js"></script>
+  <!-- <script src="https://rawgithub.com/ai/autoprefixer-rails/master/vendor/autoprefixer.js"></script> -->
+
+  <script type="text/javascript" src="vendor/codemirror/addon/comment/comment.js"></script>
+  <script type="text/javascript" src="vendor/codemirror/addon/comment/continuecomment.js"></script>
+  <script type="text/javascript" src="vendor/codemirror/addon/selection/active-line.js"></script>
+  <script type="text/javascript" src="vendor/codemirror/mode/css/css.js"></script>
+  <script type="text/javascript" src="vendor/codemirror/mode/jade/jade.js"></script>
+  <script type="text/javascript" src="vendor/codemirror/mode/htmlmixed/htmlmixed.js"></script>
+  <script type="text/javascript" src="vendor/codemirror/mode/javascript/javascript.js"></script>
+  <script type="text/javascript" src="vendor/codemirror/mode/sass/sass.js"></script>
+  <script type="text/javascript" src="vendor/codemirror/mode/xml/xml.js"></script>
+
+  <!-- <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/less.js/2.1.1/less.min.js"></script>
+  <script type="text/javascript" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/28359/inlet.js"></script>
+  <script type="text/javascript" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/28359/haml.js"></script>
+  <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/codemirror/5.11.0/mode/haml/haml.min.js"></script>
+  <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/codemirror/5.11.0/mode/ruby/ruby.min.js"></script> -->
+
+
+  <!-- Lint -->
+  <link rel="stylesheet" href="vendor/codemirror/addon/lint/lint.css">
+  <script type="text/javascript" src="vendor/codemirror/addon/lint/lint.js"></script>
+  <script type="text/javascript" src="vendor/codemirror/addon/lint/css-lint.js"></script>
+  <script type="text/javascript" src="vendor/codemirror/addon/hint/css-hint.js"></script>
+  <script type="text/javascript" src="vendor/codemirror/addon/lint/html-lint.js"></script>
+  <script type="text/javascript" src="vendor/codemirror/addon/hint/html-hint.js"></script>
+  <script type="text/javascript" src="vendor/codemirror/addon/lint/javascript-lint.js"></script>
+  <script type="text/javascript" src="vendor/codemirror/addon/hint/javascript-hint.js"></script>
+
+  <!-- HTML - CSS - JS / Lint -->
+ <script type="text/javascript" src="app/assets/js/csslint.js"></script>
+  <script type="text/javascript" src="http://htmlhint.com/js/htmlhint.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.11.0/addon/lint/javascript-lint.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jshint/2.9.1/jshint.js"></script>
+
+
+  <script type="text/javascript" src="app/app.js"></script>
+  <script type="text/javascript" src="app/app.routes.js"></script>
+
+	<!-- core modules -->
+  <script type="text/javascript" src="app/core/core.module.js"></script>
+  <script type="text/javascript" src="app/core/config.js"></script>
+  <script type="text/javascript" src="app/core/notifier.js"></script>
+	<!-- end core -->
+
+	<!-- session modules -->
+	<script type="text/javascript" src="app/session/session.module.js"></script>
+	<script type="text/javascript" src="app/session/authInterceptorService.js"></script>
+	<script type="text/javascript" src="app/session/authTokenService.js"></script>
+	<script type="text/javascript" src="app/session/authService.js"></script>
+	<script type="text/javascript" src="app/session/sessionCtrl.js"></script>
+	<!-- end session -->
+
+	<!-- dashboard modules -->
+	<script type="text/javascript" src="app/dashboard/dashboard.module.js"></script>
+	<script type="text/javascript" src="app/dashboard/dashboardCtrl.js"></script>
+	<script type="text/javascript" src="app/dashboard/dashboardDirective.js"></script>
+	<!-- end dashboard -->
+
+	<!-- users modules -->
+  <script type="text/javascript" src="app/user/user.module.js"></script>
+  <script type="text/javascript" src="app/user/userService.js"></script>
+	<!-- end users -->
+
+	<!-- projects modules -->
+	<script type="text/javascript" src="app/project/project.module.js"></script>
+	<script type="text/javascript" src="app/project/projectService.js"></script>
+	<script type="text/javascript" src="app/project/createProjectCtrl.js"></script>
+	<script type="text/javascript" src="app/project/detailProjectCtrl.js"></script>
+	<script type="text/javascript" src="app/project/editProjectCtrl.js"></script>
+	<script type="text/javascript" src="app/project/draggerDirective.js"></script>
+	<script type="text/javascript" src="app/project/libDirective.js"></script>
+	<!-- end projects -->
+
+	<!-- comments modules -->
+  <script type="text/javascript" src="app/comment/comment.module.js"></script>
+  <script type="text/javascript" src="app/comment/commentCtrl.js"></script>
+  <script type="text/javascript" src="app/comment/commentService.js"></script>
+  <script type="text/javascript" src="app/comment/socketService.js"></script>
+  <script type="text/javascript" src="app/comment/reverseFilter.js"></script>
+	<!-- end comments -->
+
+	<!-- profile modules -->
+  <script type="text/javascript" src="app/profile/profile.module.js"></script>
+  <script type="text/javascript" src="app/profile/profileCtrl.js"></script>
+  <script type="text/javascript" src="app/profile/passwordDirective.js"></script>
+	<!-- end profile -->
+
+	<!-- portfolio modules -->
+  <script type="text/javascript" src="app/portfolio/portfolio.module.js"></script>
+  <script type="text/javascript" src="app/portfolio/portfolioCtrl.js"></script>
+	<!-- end portfolio -->
+
+	<!-- admin modules -->
+  <script type="text/javascript" src="app/admin/admin.module.js"></script>
+  <script type="text/javascript" src="app/admin/adminCtrl.js"></script>
+  <script type="text/javascript" src="app/admin/adminService.js"></script>
+	<!-- end admin -->
+
+	</head>
+	<body>
+		<div class="navbar navbar-default navbar-static-top" role="navigation" bs-navbar ng-controller="SessionController as main">
+			<div class="navbar-header">
+				<a href="#" class="menu-icon ion-navicon-round"></a>
+        <a class="navbar-brand" href="/dashboard">
+          <span class="glyphicon glyphicon-blackboard"></span> UPM: <strong>WebApp</strong>
+        </a>
+      </div>
+
+      <nav>
+        <ul class="nav navbar-nav left-nav navbar-management" role="navigation">
+        <li data-match-route="/$">
+          <a href="/dashboard">
+            <span class="glyphicon glyphicon-home"></span> Home
+          </a>
+        </li>
+        <li data-match-route="/add" ng-if="main.isLoggedIn">
+          <a href="/add">
+            <span class="glyphicon glyphicon-briefcase"></span> Nuevo Proyecto
+          </a>
+        </li>
+        <li data-match-route="/projects" ng-if="main.isLoggedIn">
+          <a href="/users/{{main.currentUser.id}}/projects">
+            <span class="glyphicon glyphicon-paperclip"></span> Mis Proyectos
+          </a>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav right-nav right-nav-login pull-right" ng-if="!main.isLoggedIn">
+        <li data-match-route="/login"><a href="/login">Login</a></li>
+        <li data-match-route="/signup"><a href="/signup">Sign up</a></li>
+      </ul>
+      <ul class="nav navbar-nav right-nav pull-right" ng-if="main.isLoggedIn">
+        <li class="dropdown">
+          <a href="" class="dropdown-toggle profileLink" data-toggle="dropdown">{{currentUser.email}} <b class="caret"></b> </a>
+          <ul class="dropdown-menu">
+            <li ng-if="main.isAdmin"><a href="/admin">Admin</a></li>
+            <li class=""><a href="/profile/{{main.currentUser.id}}"> Editar Perfil</a></li>
+            <li clas="logoutLink"><a href="/" ng-click="main.doLogout()">Logout</a></li>
+          </ul>
+        </li>
+      </ul>
+      </nav>
+    </div>
+
+	<toasty></toasty>
+	<div ng-view></div>
+
+  <footer class="container text-center">
+    <p>
+      &copy; 2016 UPM: WebApp.
+    </p>
+  </footer>
+  <script type="text/javascript" src="app/assets/js/functions.js"></script>
+</body>

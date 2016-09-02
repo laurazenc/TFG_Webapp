@@ -1,0 +1,22 @@
+@media screen and (max-width: 850px) {
+  .panel-body{
+    .form-group{
+      input{
+        margin-bottom: 15px;
+
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .signup-panel{
+    max-width: 90%;
+    position: relative;
+
+  }
+
+  .center-form{
+    width: 100%;
+  }
+}

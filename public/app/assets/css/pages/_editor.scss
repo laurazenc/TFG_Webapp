@@ -1,0 +1,291 @@
+.form{
+  text-align: left;
+}
+
+.btn-save2{
+  position: absolute;
+  z-index: 9999;
+  bottom: 0;
+  top: 40px;
+}
+
+  // Editors
+.inlet_slider {
+  z-index: 9999;
+}
+
+#bar {
+  flex: 0 0 100%;
+  height: 10px;
+  background: $guttter-color;
+}
+#codeBlocks {
+  opacity: 1;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex: 1;
+  flex-flow: wrap;
+  margin-top: 30px;
+  height: 50vh;
+  overflow: hidden;
+  transition: opacity 1s;
+
+  .loaded & {
+    opacity: 1;
+  }
+
+  .controls {
+    position: relative;
+    height: 30px;
+    flex: 0 0 100%;
+
+    .button-group {
+      display: inline-block;
+      margin: 5px 10px;
+      font-size: 0;
+
+      .button {
+        box-shadow: inset 0 0 0 1px #333;
+        display: inline-block;
+        padding: 5px 10px;
+        height: 20px;
+        line-height: 1;
+        font-size: 10px;
+        box-sizing: border-box;
+        color: #898989;
+        background: #282828;
+
+        &:last-of-type {
+          border-top-right-radius: 3px;
+          border-bottom-right-radius: 3px;
+        }
+        &:first-of-type {
+          border-top-left-radius: 3px;
+          border-bottom-left-radius: 3px;
+        }
+      }
+
+      .checkbox {
+        position: absolute;
+        top: 0;
+        left: -30px;
+
+        &:checked + .button {
+          background: #111;
+          color: #fff;
+        }
+      }
+    }
+
+  }
+
+
+  .codeBlock {
+    flex: 1 1 30%;
+    border-right: 5px solid $guttter-color;
+    height: calc(100% - 40px);
+
+    .CodeMirror {
+      height: calc(100% - 40px);
+      font-family: Inconsolata, monospace;
+      font-size: 16px;
+      background-color: #3f3f3f;
+      color: #dcdccc;
+    }
+    &:last-child {
+      border: 0;
+    }
+    overflow: hidden;
+
+    &.closed {
+      flex: 0 0 0;
+      height: 0;
+      border: 0;
+
+    }
+    .title {
+      padding: 10px;
+      line-height: 20px;
+      height: 40px;
+      position: relative;
+      background: #333 !important;
+      color: #fff;
+
+      button, select {
+        cursor: pointer;
+      }
+
+      .select,
+      select {
+        display: inline-block;
+        box-sizing: border-box;
+        -webkit-appearance: none;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        padding: 10px;
+        font-size: 0.7em;
+        border-radius: 0;
+        color: #fff;
+        background: none;
+        border: 0;
+        box-shadow: 0;
+        outline: none !important;
+
+        option{
+          color: #333;
+        }
+      }
+
+      .closePanel {
+        position: absolute;
+        top: 0;
+        right: 0;
+        line-height: 20px;
+        font-size: 20px;
+        height: 20px;
+        width: 20px;
+        border: 0;
+        background: none;
+        color: #fff;
+        padding: 0;
+        font-family: Roboto;
+        font-weight: 300;
+        outline: none !important;
+      }
+
+      .jsCompile{
+        display: block;
+        top: 0;
+        right: 30px;
+        position: absolute;
+        padding: 10px;
+        margin-left: 50px;
+        color: #333;
+      }
+
+    }
+  }
+}
+
+.glyphicon-remove-circle{
+  margin-right: 5px !important;
+}
+
+.CodeMirror-lint-markers {
+    width: 0px !important;
+}
+
+.line-error {
+  background: #FBC2C4 !important;
+  color: #8a1f11 !important;
+  width: 100%;
+  height: auto;
+  margin-bottom: 1px;
+  font-size: 12px;
+}
+
+
+
+.result{
+  position: relative;
+  min-height: 400px;
+  max-height: 600px;
+
+}
+#view {
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+  background: #fff;
+  height: 100%;
+  min-height: 400px;
+  width: 100%;
+}
+
+
+@media screen and (max-width: 850px) {
+  .help{
+    width: 100%;
+    float: none;
+    display: block;
+    margin: 10px 0;
+    background-color: white;
+    color: grey;
+    text-align: center;
+    border-radius: 3px;
+  }
+  .add{
+    h2{
+      text-align: center;
+    }
+
+    .form-group{
+      margin-bottom: 7px !important;
+      padding-bottom: 5px;
+      border-bottom: 1px solid #c8cfdc;
+      text-align: left;
+    }
+
+    .pull-right{
+      width: 100%;
+      float: none;
+      display: block;
+    }
+
+    .libs-wrap{
+      .controls{
+        .addBtn{
+          width: 100%;
+          float: none;
+          display: block;
+        }
+      }
+    }
+  }
+  #codeBlocks{
+    width: 90%;
+    display: initial;
+    .controls{
+      margin: 5px 0;
+    }
+    .codeBlock{
+
+      display: block;
+      overflow: visible;
+      flex: none;
+      height: 150px;
+      margin: 5px;
+    }
+
+    .rg-bottom{
+      position: relative;
+      cursor: default;
+      span{
+        display: none;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 550px) {
+  .codeHelp{
+    ul{
+      width: 90% !important;
+    }
+  }
+  .libs-wrap{
+    .lib-list{
+      .external-lib{
+
+        .lib-url{
+          input{
+            max-width: 80%;
+          }
+        }
+      }
+    }
+  }
+}

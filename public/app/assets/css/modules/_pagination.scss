@@ -1,0 +1,13 @@
+.pagination-wrap{
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+
+
+  .pagination{
+    .active a{
+      background-color: $brand-primary;
+    }
+  }
+
+}

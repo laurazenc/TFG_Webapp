@@ -1,0 +1,202 @@
+.navbar {
+  min-height: 50px;
+  border: 0;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .26);
+}
+
+
+.navbar-header {
+  transition: 0.25s all;
+  float: left;
+	line-height: 50px;
+  padding: 0 15px;
+  background-color: $navbar-default-brand-hover-color;
+
+
+	&:hover{
+		background-color: $navbar-default-brand-color;
+		a, a > span, a > strong{
+			color: $navbar-default-brand-hover-color !important;
+		}
+	}
+
+
+	.navbar-brand {
+		height: 50px;
+		padding: 0 15px;
+		font-size: 1.15em;
+		line-height: 50px;
+		margin-left: -15px;
+	}
+
+	.menu-icon{
+		position: relative;
+		line-height: 50px;
+		height: 50px;
+		z-index: 999;
+		font-size: 24px;
+		display: none;
+	}
+}
+
+.navbar-nav {
+  float: left;
+  margin: 0;
+
+  > li {
+    float: left;
+
+    > a {
+      padding: 0 10px;
+      line-height: 47px;
+    }
+
+  }
+}
+
+.navbar-nav .open .dropdown-menu{
+	position: absolute;
+	background-color: #ffffff;
+	width: 100%;
+}
+
+.right-nav{
+	li{
+		.dots{
+			line-height: 50px;
+			position: absolute;
+			top: 0;
+			right: 0;
+			display: none;
+			width: 50px;
+		}
+	}
+}
+
+.navbar-management{
+	li{
+      border-bottom: 3px solid transparent;
+     &:hover {
+      color: #f4f6f8;
+			a{
+				background-color: $navbar-default-link-active-bg;
+			}
+    }
+
+  }
+
+  .active{
+    color: $navbar-default-brand-color;
+    border-bottom: 3px solid $navbar-default-brand-hover-color;
+  }
+}
+
+.profileLink a{
+  color: $brand-primary !important;
+}
+
+@media screen and (max-width: 750px) {
+	.navbar-header{
+		display: table;
+		.menu-icon{
+			display: table-cell;
+			margin-right: 15px;
+			vertical-align: middle;
+		}
+		.navbar-brand{
+			display: table-cell;
+			margin-left: 5px;
+		}
+
+	}
+
+	.left-nav{
+		display: none;
+		float: none;
+		margin-top: 50px;
+
+		li{
+			padding: 0;
+		}
+	}
+
+	.active-menu{
+		transition: all 300ms ease-in-out;
+		display: block;
+
+		li{
+			padding: 0 10px;
+			width: 100%;
+		}
+	}
+
+	.navbar-management{
+  	li{
+			padding: 0;
+		}
+	}
+
+	.right-nav{
+		float: right !important;
+		position: absolute;
+		top: 0;
+		right: 0;
+	}
+
+
+}
+
+@media screen and (max-width: 450px) {
+	.navbar-header{
+		width: 100%;
+
+		.menu-icon{
+			display: table;
+			float: left;
+		}
+
+	}
+
+	.right-nav{
+		float: none;
+		display: block;
+		position: relative;
+		width: 100%;
+		height: 50px;
+		line-height: 50px;
+
+		li{
+			float: right;
+			text-align: right;
+			width: 100%;
+			ul.dropdown-menu{
+				li{
+					width: 100%;
+				}
+			}
+		}
+	}
+
+  .right-nav-login{
+    float: none;
+		display: block;
+		position: relative;
+		width: 100%;
+		height: 50px;
+		line-height: 50px;
+    text-align: right;
+
+		li{
+			display: inline-block !important;
+      float: none;
+      width: auto;
+		}
+  }
+
+	.active-profile{
+		display: block;
+		position: relative;
+		width: 100%;
+		margin-top: 100px;
+	}
+}

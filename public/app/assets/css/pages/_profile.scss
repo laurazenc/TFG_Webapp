@@ -1,0 +1,129 @@
+$required: #fb5a56;
+
+.profile{
+	margin: 15px 0;
+
+	.controlButtons{
+		display: block;
+		position: relative;
+		clear: both;
+		h2{
+			margin-bottom: 5px;
+		}
+		.byline{
+			margin-left: 5px;
+		}
+	}
+}
+
+
+.form{
+	margin: 0 auto;
+	text-align: center;
+	.editGroup{
+		width: 90%;
+		.label-group, .input-group{
+			float:left;
+		}
+		.label-group{
+			max-width: 200px;
+			width: 20%;
+			text-align: right;
+			margin-right: 25px;
+			.label-name{
+				font-weight: bold;
+				span{
+					color: $required;
+				}
+			}
+
+			.label-desc{
+				font-size: 13px;
+			}
+		}
+
+		.input-group{
+			max-width: 490px;
+			width: 80%;
+			position: relative;
+			.form-group{
+				position: relative;
+				input{
+					width: 100%;
+					border-radius: 2px;
+					border: 1px solid #ccc;
+					height: 30px;
+					padding: 0 5px;
+				}
+
+				.help-block{
+					width: 350px;
+					color: $required;
+					padding: 0 8px;
+					font-size: 13px;
+				}
+
+			}
+		}
+	}
+}
+
+.marginBottom{
+	margin-bottom: 25px;
+}
+
+
+@media only screen and (max-width: 790px) {
+	.form{
+		.editGroup{
+			.label-group, .input-group{
+				float:none;
+			}
+			.label-group{
+				max-width: 90%;
+				width: 100%;
+				text-align: left;
+				margin-bottom: 10px;
+
+				.label-desc{
+					font-size: 15px;
+				}
+			}
+
+			.input-group{
+				max-width: 90%;
+				width: 100%;
+				margin-bottom: 15px;
+
+				.form-group{
+					input{
+						width: 100%;
+					}
+
+					.help-block{
+						width: 100%;
+						text-align: left;
+						color: $required;
+						padding: 0 8px;
+						font-size: 13px;
+					}
+
+				}
+			}
+		}
+	}
+}
+
+@media screen and (max-width: 390px) {
+
+	.controlButtons{
+		.pull-right{
+			display: block;
+			width: 90%;
+			margin: 10px auto;
+			text-align: center;
+			float: none !important;
+		}
+	}
+
+}

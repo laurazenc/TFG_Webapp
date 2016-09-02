@@ -1,0 +1,138 @@
+<form class="form" method="post" name="detailForm" novalidate>
+  <div class="controlButtons" ng-show="detail.isCreator()">
+    <button class="btn btn-success pull-right" type="submit"  ng-click="detail.editProject()" ng-disabled="detailForm.$invalid">Edit</button>
+  </div>
+  <div class="container">
+      <div class="byline">
+        <span class="byline-item">{{detail.project.creator.username}}</span>
+        <span class="byline-item">
+           <i class="glyphicon glyphicon-time"></i>
+          {{detail.project.created_at  | date}}
+        </span>
+      </div>
+      <h2 class="title-label" ng-hide="editing">{{detail.project.title}}</h2>
+      <!-- <p class="desc-label" ng-hide="editDesc">{{project.description}}</p> -->
+      <div ng-if="detail.project.description" class="description-wrap">
+        <h3>Descripción</h3>
+        <p class="description-text" ta-bind="text" ng-model="detail.project.description" ta-readonly='disabled'>{{detail.project.description}}</p>
+      </div>
+
+  </div>
+
+  <div id="codeBlocks" class="codeBlocks"  resizable r-directions="['bottom']">
+    <div class="controls">
+      <div class="button-group">
+        <input id="showHTML" checked="checked" type="checkbox" class="checkbox" />
+        <label for="showHTML" class="button">HTML</label>
+        <input id="showCSS" checked="checked" type="checkbox" class="checkbox" />
+        <label for="showCSS" class="button">CSS</label>
+        <input id="showJS" checked="checked" type="checkbox" class="checkbox" />
+        <label for="showJS" class="button">JS</label>
+      </div>
+    </div>
+
+    <div class="codeBlock html form-group">
+      <div class="title">
+        <button type="button" data-toggle=".html" class="closePanel">&times;</button>
+        <select id="htmlSelect">
+          <option value="text/html">HTML</option>
+        </select>
+      </div>
+      <textarea ui-codemirror="editorHTML" id="editorHTML" ng-model="detail.project.code[0].html"></textarea>
+    </div>
+
+    <div class="codeBlock css">
+      <div class="title">
+        <button type="button" data-toggle=".css" class="closePanel">&times;</button>
+        <select id="cssSelect">
+          <option value="text/css">CSS</option>
+        </select>
+      </div>
+      <textarea ui-codemirror="editorCSS" id="editorCSS" ng-model="detail.project.code[0].css" id="codeCSS"></textarea>
+    </div>
+
+    <div class="codeBlock js">
+      <div class="title">
+        <button type="button" data-toggle=".js" class="closePanel">&times;</button>
+        <div class="select">JS</div>
+      </div>
+      <textarea ui-codemirror="editorJS" id="editorJS" ng-model="detail.project.code[0].js"></textarea>
+    </div>
+    <div id="bar" ></div>
+  </div>
+</form>
+
+<!-- RESULT -->
+<div class="result">
+  <style id="style"></style>
+  <script id="script"></script>
+  <script id="jQ" src="http://code.jquery.com/jquery-2.2.0.min.js"></script>
+
+  <iframe id="view" class="view" sandbox="allow-scripts allow-pointer-lock allow-same-origin allow-popups allow-forms"></iframe>
+</div>
+
+<!-- COMMENTS -->
+<div class="comments" ng-controller="CommentController as cc">
+	<div class="container">
+		<div class="comments-wrap col-sm-10 col-sm-offset-1">
+
+
+			<!-- COMMENT FORM -->
+			<div class="add-comment-wrap clearflix" >
+				<h3>Añadir Comentario</h3>
+				<form class="form clearflix" method="post" name="commentForm" novalidate ng-submit="cc.addComment()">
+					<textarea name="newComment" placeholder="Nuevo comentario" ng-keypress="cc.enterComment($event)" ng-model="cc.newComment"></textarea>
+					<div class="controlButtons">
+						<button class="btn btn-success" type="submit">Enviar</button>
+					</div>
+				</form>
+			</div>
+
+			<!-- COMMENT LIST -->
+      <div ng-if="cc.ProjectComments.length > 0" class="comments-list-wrap">
+				<h2>Comentarios ( {{cc.ProjectComments.length}} )</h2>
+
+				<ul class="comment-list">
+
+
+					<li dir-paginate="comment in cc.ProjectComments | reverse |itemsPerPage:5:'comment-list'" pagination-id="comment-list"  class="col-md-4 col-sm-6 comment-wrap">
+						<div class="comment-info">
+							<span>
+								<i class="glyphicon glyphicon-user"></i>
+								<a href="/profile/{{comment.creator._id}}">
+									{{comment.creator.username}}
+								</a>
+								<span ng-if="cc.isAuthor(comment)" class="autorBadge">autor</span>
+							</span>
+							<span>
+								<i class="glyphicon glyphicon-time"></i>
+								{{comment.created_at | date }}
+							</span>
+						</div>
+						<div class="comment-content">
+							<textarea ng-if="cc.isWriter(comment)" name="editComment" ng-model="comment.content"></textarea>
+							<p ng-if="!cc.isWriter(comment)">
+								{{comment.content}}
+							</p>
+						</div>
+						<div class="comment-edit" ng-if="cc.isWriter(comment)">
+							<a href="" class="removeComment" ng-click="cc.deleteComment(comment)">Borrar</a>
+							<a href="" class="editComment" ng-click="cc.editComment(comment)">Editar</a>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+    <div class="pagination-wrap clearfix">
+      <dir-pagination-controls pagination-id='comment-list'
+        max-size="5"
+        direction-links="true"
+        boundary-links="true" >
+      </dir-pagination-controls>
+    </div>
+
+	</div>
+</div>
+
+<script type="text/javascript" src="app/assets/js/editProject.js"></script>

@@ -1,0 +1,20 @@
+.login{
+  .form-group{
+    input{
+      border-radius: 5px !important;
+      margin-bottom: 15px;
+    }
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .login-panel{
+    position: relative;
+    max-width: 90% !important;
+  }
+
+  .center-form{
+    position: relative;
+    width: 100%;
+  }
+}
